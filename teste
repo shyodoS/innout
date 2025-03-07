@@ -1,0 +1,38 @@
+<?php 
+session_start();
+requireValidSession();
+$date = (new DateTime())->getTimestamp();
+setlocale(LC_ALL, 'pt_BR.utf-8');
+$uppercaseMonth = ucfirst(gmstrftime('%B'));
+$today = utf8_encode(strftime( '%A, %d de ' .$uppercaseMonth. ' de %Y', strtotime('today')));
+loadTemplateView('day_records', ['today' => $today]);
+?>
+
+
+<?php
+session_start();
+requireValidSession();
+
+$date = (new Datetime())->getTimestamp();
+$today = utf8_encode(strftime('%d de %B de %Y', $date));
+loadTemplateView('day_records', ['today' => $today]);
+
+
+
+<?php  
+session_start();
+requireValidSession();
+ 
+$date = new DateTime();
+$formatter = new IntlDateFormatter(
+    'pt_BR', // Localização (Português do Brasil)
+    IntlDateFormatter::FULL, // Formato da data completa
+    IntlDateFormatter::NONE // Sem formato de hora
+);
+$formatter->setPattern('d \'de\' MMMM \'de\' yyyy');
+$today = $formatter->format($date);
+ 
+loadTemplateView('day_records', ['today' => $today]);
+ 
+ 
+?>
